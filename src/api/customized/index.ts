@@ -3,7 +3,7 @@ import { CommodityCategory, HotSaleCommodity, HotSearchKeywords, Result } from "
 
 enum API {
     // 得到所有花的分类名称和库存
-    COMMODITYCATEGORY_URL = '/api/getCommodityCategroy',
+    COMMODITYCATEGORY_URL = '/api/getCommodityCategory',
     // 得到热搜关键词和搜索次数
     HOTSEARCHKEYWORDS_URL = '/api/getHotSearchKeywords',
     // 得到热门销售数据

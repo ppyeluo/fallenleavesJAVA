@@ -102,7 +102,7 @@ const getSearchCommodity = async () => {// 页面滚动到顶部
     let result: Result<SearchCommodity> = await reqSearchCommodity(searchCommodityForm.value)
     if(result.code === 200){
         total.value = result.data.total!
-        searchCommodityList.value = result.data.data!
+        searchCommodityList.value = result.data.commodities!
     }
 }
 onMounted(getSearchCommodity)

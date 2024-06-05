@@ -18,7 +18,10 @@
             </el-option>
         </div>
         <div v-else>
-            <el-option-group v-if="searchResultList.type" label="类别">
+            <el-option-group v-if="searchResultList.commodityList" label="花束">
+                <el-option @click="goSearch()" v-for="c in searchResultList['commodityList']" :value="c.name" :label="c.name"></el-option>
+            </el-option-group>
+            <!-- <el-option-group v-if="searchResultList.type" label="类别">
                 <el-option @click="goSearch(t.type)" v-for="t in searchResultList['type']" :value="t.type" :label="t.typeName"></el-option>
             </el-option-group>
             <el-option-group v-if="searchResultList.commodityName" label="花束">
@@ -26,7 +29,7 @@
             </el-option-group>
             <el-option-group v-if="searchResultList.flowerLanguage" label="花语">
                 <el-option @click="goSearch()" v-for="c in searchResultList['flowerLanguage']" :value="c.name" :label="c.name"></el-option>
-            </el-option-group>
+            </el-option-group> -->
         </div>
     </el-select>
 </template>
@@ -49,7 +52,7 @@ const getHotSearchList = async () => {
     let result:Result<Commodity[]> = await reqHotSearch()
     if(result.code === 200){
         hotSearchList.value = result.data
-    }    
+    }
 }
 onMounted(getHotSearchList)
 // 搜索结果列表
@@ -60,7 +63,7 @@ const getSearchResult = debounce(async (intent:string) => {
     value.value = intent
     loading.value = true
     const result: Result<SearchResult> = await reqSearch(intent)
-    if(result.code === 200){
+    if(result.code == 200){
         searchResultList.value = result.data
     }
     loading.value = false

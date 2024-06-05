@@ -35,7 +35,7 @@
                             <div class="name">{{ item.name }}</div>
                             <div class="flowerLanguage">{{ item.flowerLanguage }}</div>
                             <div class="sell">
-                                <time class="sold">{{ item.listing_time }}上架</time>
+                                <time class="sold">{{ formatTimestamp(item.listing_time) }}上架</time>
                                 <div class="price">&yen;{{ item.price }}</div>
                             </div>
                         </div>
@@ -80,6 +80,17 @@ onMounted(async () => {
     await getNewLanuch(typeActive.value)
     typeList.value = commodityStore.type.sort((a, b) => b.typeCount! - a.typeCount!).slice(0,4)
 })
+// 时间格式化
+function formatTimestamp(timestamp:string) {
+    const date = new Date(timestamp)
+    const year = date.getFullYear()
+    const month = (date.getMonth() + 1).toString().padStart(2, '0')
+    const day = date.getDate().toString().padStart(2, '0')
+    const hours = date.getHours().toString().padStart(2, '0')
+    const minutes = date.getMinutes().toString().padStart(2, '0')
+    const seconds = date.getSeconds().toString().padStart(2, '0')
+    return `${year}年${month}月${day}日 ${hours}:${minutes}:${seconds}`
+}
 </script>
 
 <style scoped lang='scss'>

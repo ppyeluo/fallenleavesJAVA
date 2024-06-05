@@ -4,8 +4,11 @@ import { GET_TOKEN, REMOVE_TOKEN, SET_TOKEN } from "@/utils/token"
 import { defineStore } from "pinia"
 import { ref } from "vue"
 import MyMessage from '@/utils/myMessage'
+import { useRouter } from "vue-router"
 
 const useUserStore = defineStore('user', () => {
+    const router = useRouter()
+
     // 登录弹窗是否可见，初始为false不可见
     let loginDialogVisible = ref<boolean>(false)
 
@@ -25,12 +28,16 @@ const useUserStore = defineStore('user', () => {
             })
             return 'ok'
         }else {
+            MyMessage({
+                message:result.message,
+                type:'error',
+            })
             throw new Error(result.message)
         }
     }
     const userRegister = async (data:any) => {  // 用户注册
         let result: Result<any> = await reqRegister(data)
-        if(result.code === 200){
+        if(result.code === 200 && result.message == 'ok'){
             token.value = (result.data as string)
             SET_TOKEN((result.data as string))
             loginDialogVisible.value = false
@@ -40,6 +47,10 @@ const useUserStore = defineStore('user', () => {
             })
             return 'ok'
         }else {
+            MyMessage({
+                message:result.message,
+                type:'error',
+            })
             throw new Error(result.message)
         }
     }
@@ -52,6 +63,7 @@ const useUserStore = defineStore('user', () => {
                 message:'退出登录成功！',
                 type:'info',
             })
+            router.push('/')
         }
     }
     // 根据token获取用户信息

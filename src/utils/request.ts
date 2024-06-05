@@ -7,10 +7,10 @@ import { REMOVE_TOKEN } from './token'
 
 const userStore = useUserStore()
 const request:AxiosInstance = axios.create({
-    baseURL: import.meta.env.VITE_SERVE,
-    headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-    },
+    baseURL: "http://localhost:8080/",
+    // headers: {
+    //     'Content-Type': 'application/x-www-form-urlencoded'
+    // },
     timeout: 5000
 })
 

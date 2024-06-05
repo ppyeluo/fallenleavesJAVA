@@ -18,6 +18,7 @@ import { Ref, inject } from 'vue'
 import { Commodity } from '@/api/commodity/type'
 
 const commodityDetail = inject<Ref<Commodity>>('commodityDetail')
+
 </script>
 
 <style scoped lang='scss'>

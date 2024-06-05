@@ -39,7 +39,7 @@ export const reqHotSearch = () => request.get<any, Result<Commodity[]>>(API.HOTS
 // 搜索框得到搜索结果
 export const reqSearch = (intent:string) => request.get<any, Result<SearchResult>>(API.SEARCH_URL,{ params:{ intent } })
 // 得到搜索页搜索结果
-export const reqSearchCommodity = ({ page, pageSize,sortField, sortOrder, intent, type }:SearchCommodity) => request.post<any, Result<SearchCommodity>>(API.SEARCHCOMMODITY_URL, { page, pageSize,sortField, sortOrder }, { params: { intent, type } })
+export const reqSearchCommodity = ({ page, pageSize, sortField, sortOrder, intent, type }:SearchCommodity) => request.post<any, Result<SearchCommodity>>(API.SEARCHCOMMODITY_URL, { page, pageSize,sortField, sortOrder, intent, type  })
 // 获取商品的评论
 export const reqCommodityComments = (id:string) => request.get<any, Result<CommodityComment[]>>(API.COMMODITYCOMMENTS_URL+`${id}`)
 // 给商品的评论点赞

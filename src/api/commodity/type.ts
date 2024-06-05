@@ -31,6 +31,7 @@ export interface CommodityType{
 }
 // 定义搜索结果类型
 export interface SearchResult {
+    commodityList?:Commodity[], // java定义的返回类型
     type?: CommodityType[],
     commodityName?: Commodity[],
     flowerLanguage?: Commodity[]
@@ -51,7 +52,8 @@ export interface SearchCommodity{
     total?: number,  // 总共有多少个
     sortField: SortField,  // 按什么排序
     sortOrder: SortOrder, // 顺序还是降序
-    data?: Commodity[]
+    data?: Commodity[],
+    commodities?: Commodity[] // java返回数据类型
 }
 // 商品评论
 export interface CommodityComment {

@@ -38,7 +38,22 @@
                 <div class="edit_item">
                     <div class="avatar_key">头像</div>：
                     <div class="avatar_value">
-                        <el-avatar icon="UserFilled" />
+                        <el-upload
+                            class="upload-demo"
+                            :http-request="customUpload"
+                            :show-file-list="false"  
+                            :on-success="handleAvatarSuccess"
+                            :before-upload="beforeAvatarUpload"
+                        >
+                            <el-tooltip
+                                effect="dark"
+                                content="点我更换头像"
+                                placement="right"
+                            >
+                                <el-avatar v-if="!editAvatar" style="margin-left: 10px;border: 1px solid black;" :src="userIn.avatar" />
+                                <el-avatar v-else style="margin-left: 10px;border: 1px solid black;" :src="editAvatar" />
+                            </el-tooltip>
+                        </el-upload>
                     </div>
                 </div>
                 <div class="edit_item">
@@ -65,7 +80,7 @@
             <template #footer>
                 <div class="dialog-footer">
                     <el-button @click="editDialogVisible = false">取消</el-button>
-                    <el-button type="primary" @click="editDialogVisible = false">保存更改</el-button>
+                    <el-button type="primary" @click="submitChange">保存更改</el-button>
                 </div>
             </template>
         </el-dialog>
@@ -84,13 +99,18 @@
 
 <script setup lang='ts'>
 defineOptions({ name: 'UserCard' })
-import { reqUserInfo } from '@/api/user';
+import { reqUpdateAvatar, reqUploadAvatar, reqUserInfo } from '@/api/user';
 import type { Result, userInfo } from '@/api/user/type';
 import useUserStore from '@/store/modules/user';
 import { onMounted, ref, watch } from 'vue';
 import { undeveloped } from '@/utils/undeveloped';
+import type { UploadProps } from 'element-plus'
+import MyMessage from '@/utils/myMessage';
+import { SET_TOKEN } from '@/utils/token';
 
 const userStore = useUserStore()
+// 编辑弹窗显示与否
+let editDialogVisible = ref<boolean>(false)
 // 编辑弹窗中各个“更改”按钮的禁用状态
 interface disabledStatusInterface {
   username: boolean;
@@ -98,6 +118,7 @@ interface disabledStatusInterface {
   email: boolean;
   password: boolean;
 }
+// 编辑框头像显示
 const disabledStatus = ref<disabledStatusInterface>({
     username: true,
     phone: true,
@@ -118,6 +139,7 @@ const changeDisabled = (r: 'username' | 'phone' | 'email' | 'password') => {
 }
 // 编辑框关闭回调
 const closeDialog = () => {
+    editDialogVisible.value = false
     editUserInfo.value = userIn.value
     disabledStatus.value = {
         username: true,
@@ -126,6 +148,8 @@ const closeDialog = () => {
         password: true
     }
 }
+// 编辑框头像
+let editAvatar = ref<string | null>(null)
 // 用户信息
 let userIn = ref<userInfo>({} as userInfo)
 // 得到用户信息
@@ -145,8 +169,6 @@ const logout = () => {
     userStore.userLogout()
 }
 onMounted(getUser)
-// 编辑弹窗显示与否
-let editDialogVisible = ref(false)
 // 返回标签类名
 const memberTag = (tag:string) => {
     if(tag == '钻石会员'){
@@ -157,7 +179,44 @@ const memberTag = (tag:string) => {
         return 'silver'
     } else {
         return 'normal'
-    } 
+    }
+}
+// 显示上传的图片格式
+const beforeAvatarUpload: UploadProps['beforeUpload'] = (rawFile) => {
+  if (rawFile.type !== 'image/jpeg') {
+    MyMessage({
+        type:'error',
+        message: '图片类型只能是png、jpg或jpeg格式'
+    })
+    return false
+  } else if (rawFile.size / 1024 / 1024 > 2) {
+    MyMessage({
+        type:'error',
+        message: '上传头像的大小不能超过2MB'
+    })
+    return false
+  }
+  return true
+}
+// 自定义上传
+const customUpload = async (file:any) => {
+    let res:Result<any> = await reqUploadAvatar(file.file)
+    editAvatar.value = res.data
+    console.log(userIn.value)
+}
+// 文件上传成功的钩子
+const handleAvatarSuccess = () => {
+    
+}
+//
+const submitChange = async () => {
+    editDialogVisible.value = false
+    if(editAvatar.value){
+        const res = await reqUpdateAvatar(editAvatar.value)
+        SET_TOKEN(res.data)
+        getUser()
+        window.location.reload()
+    }
 }
 </script>
 

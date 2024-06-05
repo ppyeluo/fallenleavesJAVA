@@ -43,10 +43,7 @@
 defineOptions({name: 'Banner'})
 import { ref } from 'vue';
 
-const loading = ref<boolean>(true)
-setTimeout(() => {
-    loading.value = false
-}, 1000);
+const loading = ref<boolean>(false)
 </script>
 
 <style scoped lang='scss'>
