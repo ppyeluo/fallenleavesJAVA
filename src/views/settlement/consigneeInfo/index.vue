@@ -41,9 +41,9 @@ let isExpand = ref<boolean>(false)
 // 地址列表
 const addressList = ref<Address[]>([])
 // 得到默认地址
-const defultAddress = computed(() => addressList.value.find(i => i.default == 1)!)
+const defultAddress = computed(() => addressList.value.find(i => i.isDefault == 1)!)
 // 折叠地址（除去默认地址）
-const foldAddress = computed(() => addressList.value.filter(i => i.default != 1)!)
+const foldAddress = computed(() => addressList.value.filter(i => i.isDefault != 1)!)
 // 根据地址信息拼接出详细地址
 const converAddress = (addressItem: Address) => {
     return `${addressItem.province} ${addressItem.city} ${addressItem.town} ${addressItem.detail}`

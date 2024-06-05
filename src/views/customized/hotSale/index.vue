@@ -28,7 +28,6 @@ const getData = async () => {
     let result: Result<HotSaleCommodity[]> = await reqHotSaleCommodity()
     if(result.code === 200){
         tableData.value = result.data
-        console.log(tableData.value)
     }
 }
 onMounted(getData)

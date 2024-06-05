@@ -23,5 +23,5 @@ export interface Address {
     city: string,
     town: string,
     detail: string,
-    default: 1
+    isDefault: number
 }

@@ -29,11 +29,11 @@ onMounted(async () => {
     const { id } = route.query
     let res: Result<Commodity> = await reqCommodity(id as string)
     commodityDetail.value = res.data
-})
-// 页面滚动到顶部
-window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
+    // 页面滚动到顶部
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    })
 })
 </script>
 

@@ -39,7 +39,7 @@
         </div>
         <div class="item">
             <div class="title">已售</div><div>：</div>
-            <div class="content">{{ commodityDetail?.sold }}<span style="font-size: .8em;color: #808080; margin-left: .2em;">件</span></div>
+            <div class="content">{{ Math.round(commodityDetail!.sold) }}<span style="font-size: .8em;color: #808080; margin-left: .2em;">件</span></div>
         </div>
         <div class="item">
             <div class="title">数量</div><div>：</div>

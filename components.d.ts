@@ -8,6 +8,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
+    ElBadge: typeof import('element-plus/es')['ElBadge']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCard: typeof import('element-plus/es')['ElCard']
     ElCarousel: typeof import('element-plus/es')['ElCarousel']
@@ -32,8 +33,11 @@ declare module 'vue' {
     ElSelect: typeof import('element-plus/es')['ElSelect']
     ElSkeleton: typeof import('element-plus/es')['ElSkeleton']
     ElSkeletonItem: typeof import('element-plus/es')['ElSkeletonItem']
+    ElStep: typeof import('element-plus/es')['ElStep']
+    ElSteps: typeof import('element-plus/es')['ElSteps']
     ElTable: typeof import('element-plus/es')['ElTable']
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
+    ElTag: typeof import('element-plus/es')['ElTag']
     ElText: typeof import('element-plus/es')['ElText']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
     ElUpload: typeof import('element-plus/es')['ElUpload']

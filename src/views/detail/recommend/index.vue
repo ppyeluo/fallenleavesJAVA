@@ -30,8 +30,8 @@ import { useRouter } from 'vue-router';
 
 const router = useRouter()
 // 打开新的详情页
-const changeCommodity = (id:string) => {
-    router.push(`/detail?id=${id}`)
+const changeCommodity = async (id:string) => {
+    await router.push(`/detail?id=${id}`)
     window.location.reload()
 }
 let recommendCommodity = ref<Commodity[]>([])

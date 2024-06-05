@@ -34,7 +34,7 @@
                         <div class="info">
                             <div class="name">{{ item.name }}</div>
                             <div class="flowerLanguage">{{ item.flowerLanguage }}</div>
-                            <div class="sold">已售{{ item.sold }}</div>
+                            <div class="sold">已售{{ Math.round(item.sold) }}件</div>
                         </div>
                     </div>
                 </div>
@@ -139,6 +139,7 @@ onMounted(getHotBuy)
                     bottom: .3em;
                     padding-left: 10px;
                     font-size: 12px;
+                    color: #808080;
                 }
             }
         }
