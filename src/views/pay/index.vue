@@ -27,6 +27,7 @@ let timer = setInterval(() => {
     if(time.value == 0){
         clearInterval(timer)
         window.history.back()
+        window.history.back()
     }
 }, 1000);
 </script>
