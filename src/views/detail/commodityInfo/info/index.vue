@@ -119,7 +119,8 @@ const addCollect = async () => {
         return
     }
     let result: Result<addCollect> = await reqAddCollect(commodityDetail!.value.id)
-    if(result.data.isSuccess){
+    console.log(result)
+    if(result.data.success){
         MyMessage({
             type: 'success',
             message: '收藏成功！'

@@ -14,5 +14,5 @@ export interface CollectItem{
 }
 // 向收藏中添加商品
 export interface addCollect {
-    isSuccess: boolean
+    success: boolean
 }
